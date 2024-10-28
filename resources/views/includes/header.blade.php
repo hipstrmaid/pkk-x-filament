@@ -10,15 +10,15 @@
     $profilketua = 'profil-pjketua-pkk';
     $mars = 'mars-pkk';
 
-    $sekretariat = 'sekretariat';
-    $pokjai = 'pokja-i';
-    $pokjaii = 'pokja-ii';
-    $pokjaiii = 'pokja-iii';
-    $pokjaiv = 'pokja-iv';
+    $sekretariat = 'sekretariat.show';
+    $pokjai = 'pokja1.show';
+    $pokjaii = 'pokja2.show';
+    $pokjaiii = 'pokja3.show';
+    $pokjaiv = 'pokja4.show';
 
-    $agenda = 'agenda';
+    $agenda = 'agenda.index';
     $informasi = 'informasi-terbaru';
-    $galeri = 'galeri';
+    $galeri = 'galeri.index';
     $kontak = 'kontak';
 
 @endphp
@@ -71,7 +71,18 @@
             <li>
                 <details onclick="toggleDetails(event)">
                     <summary class="text-md font-bold hover:text-yellow-200">Informasi</summary>
-                    <ul class="bg-gray-100 text-md text-gray-900 rounded-none z-10 w-52">
+                    <ul class="bg-gray-100 text-md text-gray-900 rounded-none z-10 w-50">
+                        <li><a href="{{ route($agenda) }}" class="hover:bg-yellow-400">Agenda Kegiatan</a></li>
+                        <li><a href="{{ route($informasi) }}" class="hover:bg-yellow-400">Informasi Terbaru</a></li>
+                        <li><a href="{{ route($galeri) }}" class="hover:bg-yellow-400">Galeri</a></li>
+                        <li><a href="{{ route($kontak) }}" class="hover:bg-yellow-400">Kontak</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details onclick="toggleDetails(event)">
+                    <summary class="text-md font-bold hover:text-yellow-200">Kontak</summary>
+                    <ul class="bg-gray-100 text-md text-gray-900 rounded-none z-10 w-50">
                         <li><a href="{{ route($agenda) }}" class="hover:bg-yellow-400">Agenda Kegiatan</a></li>
                         <li><a href="{{ route($informasi) }}" class="hover:bg-yellow-400">Informasi Terbaru</a></li>
                         <li><a href="{{ route($galeri) }}" class="hover:bg-yellow-400">Galeri</a></li>
@@ -80,7 +91,7 @@
                 </details>
             </li>
 
-            <li>
+            {{-- <li>
                 <details onclick="toggleDetails(event)">
                     <summary class="text-md font-bold hover:text-yellow-200">Daerah</summary>
                     <ul class="bg-gray-100 text-md text-gray-900 rounded-none z-10">
@@ -97,7 +108,7 @@
                         <li><a>Link 2</a></li>
                     </ul>
                 </details>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>
@@ -168,7 +179,7 @@
                 </ul>
             </details>
         </li>
-        <li>
+        {{-- <li>
             <details onclick="toggleDetails(event)">
                 <summary class="block py-2 px-4 font-bold hover:text-yellow-200 hover:bg-blue-600">Daerah</summary>
                 <ul class="bg-gray-100 text-gray-900 py-2 px-4 rounded-none">
@@ -185,6 +196,6 @@
                     <li class="p-1 hover:bg-yellow-200"><a class="block">Link 2</a></li>
                 </ul>
             </details>
-        </li>
+        </li> --}}
     </ul>
 </div>

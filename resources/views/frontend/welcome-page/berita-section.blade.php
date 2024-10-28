@@ -2,41 +2,20 @@
     <div class="divider divider-neutral text-3xl font-bold text-sky-800">BERITA TERBARU</div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-10 py-5">
-    <div class="bg-white shadow-md overflow-hidden">
-        <img src="{{ asset('/assets/gambar/hero/1.webp') }}" alt="Judul Berita" class="w-full h-48 object-cover">
-        <div class="p-4">
-            <p class="text-gray-500 text-sm"><i class="fas fa-calendar mr-2"></i>20-09-2024</p>
-            <a href="#" class="text-lg font-semibold text-info hover:underline">Judul Berita</a>
-            <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam aspernatur
-                voluptate!</p>
+    @foreach ($beritas as $berita)
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+            <img src="{{ Storage::url($berita->thumbnail_berita) }}" alt="Judul Berita" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <a href="{{ route('berita.show', $berita->slug) }}"
+                    class="text-md font-bold text-blue-600 hover:underline transition-colors duration-200">{{ $berita->judul_berita }}</a>
+                <p class="text-gray-500 text-xs mt-1">
+                    <i class="fas fa-calendar mr-2"></i>
+                    {{ \Carbon\Carbon::parse($berita->tanggal_publish)->translatedFormat('F d, Y') }}
+                </p>
+                <p class="text-gray-700 mt-2 text-sm leading-snug">
+                    {!! Str::limit($berita->isi_berita, 80, '...') !!}
+                </p>
+            </div>
         </div>
-    </div>
-
-    <div class="bg-white shadow-md overflow-hidden">
-        <img src="{{ asset('/assets/gambar/hero/2.webp') }}" alt="Judul Berita" class="w-full h-48 object-cover">
-        <div class="p-4">
-            <p class="text-gray-500 text-sm"><i class="fas fa-calendar mr-2"></i>20-09-2024</p>
-            <a href="#" class="text-lg font-semibold text-info hover:underline">Judul Berita</a>
-            <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam aspernatur
-                voluptate!</p>
-        </div>
-    </div>
-    <div class="bg-white shadow-md overflow-hidden">
-        <img src="{{ asset('/assets/gambar/hero/3.webp') }}" alt="Judul Berita" class="w-full h-48 object-cover">
-        <div class="p-4">
-            <p class="text-gray-500 text-sm"><i class="fas fa-calendar mr-2"></i>20-09-2024</p>
-            <a href="#" class="text-lg font-semibold text-info hover:underline">Judul Berita</a>
-            <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam aspernatur
-                voluptate!</p>
-        </div>
-    </div>
-    <div class="bg-white shadow-md overflow-hidden">
-        <img src="{{ asset('/assets/gambar/hero/4.webp') }}" alt="Judul Berita" class="w-full h-48 object-cover">
-        <div class="p-4">
-            <p class="text-gray-500 text-sm"><i class="fas fa-calendar mr-2"></i>20-09-2024</p>
-            <a href="#" class="text-lg font-semibold text-info hover:underline">Judul Berita</a>
-            <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam aspernatur
-                voluptate!</p>
-        </div>
-    </div>
+    @endforeach
 </div>

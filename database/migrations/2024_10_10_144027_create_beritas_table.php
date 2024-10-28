@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
+            $table->string('judul_berita');
+            $table->string('slug')->unique();  // Slug column for URL-friendly title
+            $table->text('isi_berita');
+            $table->string('thumbnail_berita');                // Text content for the news
+            $table->string('penulis');          // Author's name
+            $table->timestamp('tanggal_publish')->nullable(); // Publish date (optional)
             $table->timestamps();
         });
     }

@@ -2,40 +2,27 @@
     <div class="divider divider-neutral text-3xl font-bold text-sky-800">GALERI</div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-    <div class="overflow-hidden shadow-lg flex-col">
-        <img src="{{ asset('/assets/gambar/hero/1.webp') }}" alt="Gambar 1" class="w-full object-cover h-56">
-        <div class="p-2 text-center">
-            <h3 class="text-lg font-semibold">Judul Gambar 1</h3>
+    @foreach ($galeris as $galeri)
+        @php
+            // Check if 'gambar' is an array or a JSON string
+            $images = is_array($galeri->gambar) ? $galeri->gambar : json_decode($galeri->gambar, true);
+            $firstImage = !empty($images) ? $images[0] : null; // Get the first image or null if empty
+        @endphp
+
+        <div class="overflow-hidden shadow-lg flex-col">
+            @if ($firstImage)
+                <img src="{{ Storage::url($firstImage) }}" alt="{{ $galeri->judul_galeri }}"
+                    class="w-full object-cover h-56">
+            @else
+                <img src="{{ asset('/assets/gambar/default-image.jpg') }}" alt="Default Image"
+                    class="w-full object-cover h-56">
+            @endif
+            <div class="flex flex-col p-3">
+                <span
+                    class="text-xs">{{ \Carbon\Carbon::parse($galeri->tanggal_galeri)->translatedFormat('F d, Y') }}</span>
+                <a href="{{ route('galeri.show', ['slug' => $galeri->slug]) }}"
+                    class="text-sm font-semibold text-sky-500 hover:underline">{{ $galeri->judul_galeri }}</a>
+            </div>
         </div>
-    </div>
-    <div class="overflow-hidden  shadow-lg flex-col">
-        <img src="{{ asset('/assets/gambar/hero/1.webp') }}" alt="Gambar 2" class="w-full object-cover h-56">
-        <div class="p-2 text-center">
-            <h3 class="text-lg font-semibold">Judul Gambar 2</h3>
-        </div>
-    </div>
-    <div class="overflow-hidden  shadow-lg flex-col">
-        <img src="{{ asset('/assets/gambar/hero/2.webp') }}" alt="Gambar 3" class="w-full object-cover h-56">
-        <div class="p-2 text-center">
-            <h3 class="text-lg font-semibold">Judul Gambar 3</h3>
-        </div>
-    </div>
-    <div class="overflow-hidden  shadow-lg flex-col">
-        <img src="{{ asset('/assets/gambar/hero/3.webp') }}" alt="Gambar 4" class="w-full object-cover h-56">
-        <div class="p-2 text-center">
-            <h3 class="text-lg font-semibold">Judul Gambar 4</h3>
-        </div>
-    </div>
-    <div class="overflow-hidden  shadow-lg flex-col">
-        <img src="{{ asset('/assets/gambar/hero/4.webp') }}" alt="Gambar 5" class="w-full object-cover h-56">
-        <div class="p-2 text-center">
-            <h3 class="text-lg font-semibold">Judul Gambar 5</h3>
-        </div>
-    </div>
-    <div class="overflow-hidden  shadow-lg flex-col">
-        <img src="{{ asset('/assets/gambar/hero/2.webp') }}" alt="Gambar 6" class="w-full object-cover h-56">
-        <div class="p-2 text-center">
-            <h3 class="text-lg font-semibold">Judul Gambar 6</h3>
-        </div>
-    </div>
+    @endforeach
 </div>

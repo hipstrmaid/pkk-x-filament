@@ -12,7 +12,7 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="table-auto w-full bg-white shadow-md rounded-lg">
+                <table class="table-auto w-full bg-white shadow-md rounded-lg border">
                     <thead>
                         <tr class="bg-blue-500 text-white">
                             <th class="px-1 py-2">No.</th>
@@ -25,23 +25,16 @@
                     </thead>
                     <tbody id="tableBody">
                         <!-- Example rows (you can generate more dynamically) -->
-                        <tr class="bg-gray-100 border-b text-center">
-                            <td class="px-1 py-2">1</td>
-                            <td class="px-4 py-2">Meeting A</td>
-                            <td class="px-4 py-2">Person 1</td>
-                            <td class="px-4 py-2">2024-10-01</td>
-                            <td class="px-4 py-2">10:00 AM</td>
-                            <td class="px-4 py-2">Room 1</td>
-                        </tr>
-                        <tr class="bg-white border-b text-center">
-                            <td class="px-1 py-2">2</td>
-                            <td class="px-4 py-2">Meeting B</td>
-                            <td class="px-4 py-2">Person 2</td>
-                            <td class="px-4 py-2">2024-10-02</td>
-                            <td class="px-4 py-2">11:00 AM</td>
-                            <td class="px-4 py-2">Room 2</td>
-                        </tr>
-                        <!-- Add more rows as needed -->
+                        @foreach ($kegiatans as $kegiatan)
+                            <tr class="bg-gray-100 border-b text-left text-sm">
+                                <td class="px-1 py-2 border border-r">{{ $loop->index + 1 }}</td>
+                                <td class="px-4 py-2 border border-r">{{ $kegiatan->nama_kegiatan }}</td>
+                                <td class="px-4 py-2 border border-r">{{ $kegiatan->dihadiri_oleh }}</td>
+                                <td class="px-4 py-2 border border-r">{{ $kegiatan->formatted_tanggal ?? 'N/A' }}</td>
+                                <td class="px-4 py-2 border border-r">{{ $kegiatan->formatted_waktu ?? 'N/A' }}</td>
+                                <td class="px-4 py-2">{{ $kegiatan->lokasi }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
